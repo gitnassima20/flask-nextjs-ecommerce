@@ -1,0 +1,25 @@
+# Virtual Environment
+venv/
+*.pyc
+__pycache__/
+
+# Environment Files
+.env
+*.db
+
+# IDE Files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Compiled Python
+*.pyc
+*.pyo
+*.pyd
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/

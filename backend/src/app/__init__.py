@@ -1,17 +1,33 @@
+import os
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_cors import CORS
-from .config import Config
-from .routes.product_routes import product_bp
+from dotenv import load_dotenv
 
-def create_app(config_class=Config):
-    """Create and configure the Flask application"""
+# Load environment variables
+load_dotenv()
+
+# Initialize extensions
+db = SQLAlchemy()
+migrate = Migrate()
+
+def create_app():
+    # Create Flask app
     app = Flask(__name__)
-    app.config.from_object(config_class)
+
+    # Load configuration
+    app.config.from_object('app.config.Config')
+
+    # Initialize extensions
+    db.init_app(app)
+    migrate.init_app(app, db)
 
     # Enable CORS
-    CORS(app, resources={r"/*": {"origins": app.config['CORS_ORIGINS']}})
+    CORS(app, resources={r"/api/*": {"origins": app.config['CORS_ORIGINS']}})
 
-    # Register Blueprints
+    # Import and register blueprints
+    from .routes.product_routes import product_bp
     app.register_blueprint(product_bp, url_prefix='/api/v1')
 
     return app

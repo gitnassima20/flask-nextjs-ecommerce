@@ -1,17 +1,14 @@
-from sqlalchemy import Column, Integer, String, Float
-from sqlalchemy.ext.declarative import declarative_base
+from app import db
 
-Base = declarative_base()
-
-class Product(Base):
+class Product(db.Model):
     __tablename__ = 'products'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(100), nullable=False)
-    description = Column(String(500))
-    price = Column(Float, nullable=False)
-    category = Column(String(50))
-    image_url = Column(String(500))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(500))
+    price = db.Column(db.Float, nullable=False)
+    category = db.Column(db.String(50))
+    image_url = db.Column(db.String(500))
 
     def to_dict(self):
         return {

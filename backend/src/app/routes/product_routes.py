@@ -1,20 +1,18 @@
 from flask import Blueprint, request, jsonify
-from sqlalchemy.orm import Session
-from app.services.product_service import ProductService
-from app.models.product import Base
 from sqlalchemy import create_engine
+from app.services.product_service import ProductService
+from app.models.product import Product
+from app import db
 from app.config import Config
 
 product_bp = Blueprint('products', __name__)
 
 # Database setup
 engine = create_engine(Config.SQLALCHEMY_DATABASE_URI)
-Base.metadata.create_all(engine)
 
 def get_db_session():
     """Create a new database session"""
-    Session = Session(bind=engine)
-    return Session()
+    return db.session
 
 @product_bp.route('/products', methods=['GET'])
 def get_products():

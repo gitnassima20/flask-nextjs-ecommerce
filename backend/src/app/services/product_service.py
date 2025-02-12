@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from app.models.product import Product
 
 class ProductService:
-    def __init__(self, db_session: Session):
+    def __init__(self, db_session):
         self.db_session = db_session
 
     def get_all_products(self, page=1, per_page=12):

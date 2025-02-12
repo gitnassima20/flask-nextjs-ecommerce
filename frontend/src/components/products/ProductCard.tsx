@@ -1,84 +1,29 @@
-"use client"
-
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { Product } from '@/lib/api';
 
 interface ProductCardProps {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  description?: string;
-  onAddToCart: () => void;
+  product: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ 
-  id, 
-  name, 
-  price, 
-  imageUrl, 
-  description,
-  onAddToCart 
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
-
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <div 
-      className="relative group bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Favorite Button */}
-      <button 
-        onClick={() => setIsFavorite(!isFavorite)}
-        className="absolute top-4 right-4 z-10 p-2 bg-white/70 rounded-full hover:bg-white/90 transition-colors"
-      >
-        <HeartIcon 
-          className={`w-6 h-6 ${
-            isFavorite 
-              ? 'text-red-500 fill-current' 
-              : 'text-gray-600 hover:text-red-500'
-          }`} 
-        />
-      </button>
-
-      {/* Product Image with Link */}
-      <Link href={`/products/${id}`} className="block relative w-full h-64 overflow-hidden">
+    <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <div className="relative w-full h-48">
         <Image 
-          src={imageUrl} 
-          alt={name} 
+          src={product.image_url} 
+          alt={product.name} 
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover group-hover:scale-110 transition-transform duration-300"
+          style={{ objectFit: 'cover' }}
+          className="transition-transform duration-300 hover:scale-105"
         />
-      </Link>
-
-      {/* Product Details */}
+      </div>
       <div className="p-4">
-        <Link href={`/products/${id}`}>
-          <h3 className="text-xl font-semibold text-gray-800 mb-2 hover:text-blue-600 transition-colors">
-            {name}
-          </h3>
-        </Link>
-        {description && (
-          <p className="text-gray-600 text-sm mb-2 line-clamp-2">{description}</p>
-        )}
+        <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+        <p className="text-gray-600 mb-2 line-clamp-2">{product.description}</p>
         <div className="flex justify-between items-center">
-          <span className="text-2xl font-bold text-blue-600">${price.toFixed(2)}</span>
-          <button 
-            onClick={onAddToCart}
-            className={`
-              flex items-center gap-2 px-4 py-2 rounded-full 
-              bg-blue-500 text-white 
-              hover:bg-blue-600 
-              transition-all duration-300
-              ${isHovered ? 'translate-x-0' : 'translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100'}
-            `}
-          >
-            <ShoppingCartIcon className="w-5 h-5" />
+          <span className="text-xl font-bold text-blue-600">${product.price.toFixed(2)}</span>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
             Add to Cart
           </button>
         </div>

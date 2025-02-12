@@ -1,3 +1,5 @@
+"use client"
+
 import ProductCard from '@/components/products/ProductCard'
 import useCartStore from '@/lib/cartContext'
 import { Product } from '@/types/product'

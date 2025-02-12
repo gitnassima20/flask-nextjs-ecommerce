@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 
 interface ProductCardProps {
@@ -44,8 +45,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         />
       </button>
 
-      {/* Product Image */}
-      <div className="relative w-full h-64 overflow-hidden">
+      {/* Product Image with Link */}
+      <Link href={`/products/${id}`} className="block relative w-full h-64 overflow-hidden">
         <Image 
           src={imageUrl} 
           alt={name} 
@@ -53,11 +54,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover group-hover:scale-110 transition-transform duration-300"
         />
-      </div>
+      </Link>
 
       {/* Product Details */}
       <div className="p-4">
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">{name}</h3>
+        <Link href={`/products/${id}`}>
+          <h3 className="text-xl font-semibold text-gray-800 mb-2 hover:text-blue-600 transition-colors">
+            {name}
+          </h3>
+        </Link>
         {description && (
           <p className="text-gray-600 text-sm mb-2 line-clamp-2">{description}</p>
         )}

@@ -4,14 +4,14 @@ import ProductCard from '@/components/products/ProductCard'
 import useCartStore from '@/lib/cartContext'
 import { Product } from '@/types/product'
 
-// Mock product data (will be replaced with API later)
+// Enhanced mock product data with descriptions
 const mockProducts: Product[] = [
   {
     id: '1',
     name: 'Vintage Leather Jacket',
     price: 129.99,
     imageUrl: 'https://via.placeholder.com/300x300?text=Leather+Jacket',
-    description: 'A stylish vintage leather jacket',
+    description: 'A timeless vintage leather jacket crafted from premium quality leather. Perfect for adding a touch of classic style to any outfit.',
     category: 'Clothing'
   },
   {
@@ -19,7 +19,7 @@ const mockProducts: Product[] = [
     name: 'Smart Wireless Earbuds',
     price: 79.50,
     imageUrl: 'https://via.placeholder.com/300x300?text=Wireless+Earbuds',
-    description: 'High-quality wireless earbuds with noise cancellation',
+    description: 'Advanced noise-cancelling wireless earbuds with crystal clear sound and long-lasting battery. Designed for music lovers and professionals.',
     category: 'Electronics'
   },
   {
@@ -27,7 +27,7 @@ const mockProducts: Product[] = [
     name: 'Ergonomic Office Chair',
     price: 249.99,
     imageUrl: 'https://via.placeholder.com/300x300?text=Office+Chair',
-    description: 'Comfortable ergonomic chair for long work hours',
+    description: 'Ergonomically designed office chair with lumbar support, adjustable height, and premium cushioning. Comfort meets productivity.',
     category: 'Furniture'
   }
 ]
@@ -40,9 +40,14 @@ export default function ProductsPage() {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6 text-center">Our Products</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="container mx-auto px-4 py-8">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Discover Our Collection</h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Explore a curated selection of high-quality products designed to enhance your lifestyle.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {mockProducts.map((product) => (
           <ProductCard
             key={product.id}

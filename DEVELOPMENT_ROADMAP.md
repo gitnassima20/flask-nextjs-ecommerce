@@ -33,19 +33,19 @@
 
 ## 🔙 Backend Setup (Flask)
 
-- [ ] Create Python virtual environment
-- [ ] Install Flask dependencies
-  - [ ] Flask
-  - [ ] Flask-CORS
-  - [ ] Flask-SQLAlchemy
-  - [ ] python-dotenv
-- [ ] Set up project structure
-  - [ ] Create `app.py`
-  - [ ] Create `models/`
-  - [ ] Create `routes/`
-- [ ] Configure database
-  - [ ] Choose SQLite/PostgreSQL
-  - [ ] Set up database models
+- [x] Create Python virtual environment
+- [x] Install Flask dependencies
+  - [x] Flask
+  - [x] Flask-CORS
+  - [x] Flask-SQLAlchemy
+  - [x] python-dotenv
+- [x] Set up project structure
+  - [x] Create `app.py`
+  - [x] Create `models/`
+  - [x] Create `routes/`
+- [x] Configure database
+  - [x] Choose SQLite/PostgreSQL
+  - [x] Set up database models
 
 ## 🛠️ Core Features Development
 
@@ -65,15 +65,19 @@
 
 ### Backend Tasks
 
-- [ ] Create product CRUD API endpoints
-  - [ ] GET /products
-  - [ ] POST /products
-  - [ ] DELETE /products/{id}
-- [ ] Create cart management endpoints
-  - [ ] POST /cart/add
-  - [ ] DELETE /cart/remove
-- [ ] Implement error handling
-- [ ] Set up database migrations
+- [x] Create product CRUD API endpoints
+  - [x] GET /products
+  - [x] POST /products
+  - [x] PUT /products/{id}
+  - [x] DELETE /products/{id}
+- [x] Create cart management endpoints
+  - [x] GET /cart
+  - [x] POST /cart/add
+  - [x] DELETE /cart/remove
+  - [x] DELETE /cart/clear
+  - [x] PATCH /cart/update
+- [x] Implement error handling
+- [x] Set up database migrations
 
 ## 🔒 Optional Enhancements
 

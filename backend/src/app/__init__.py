@@ -28,6 +28,8 @@ def create_app():
 
     # Import and register blueprints
     from .routes.product_routes import product_bp
+    from .routes.cart_routes import cart_bp
     app.register_blueprint(product_bp, url_prefix='/api/v1')
+    app.register_blueprint(cart_bp, url_prefix='/api/v1')
 
     return app

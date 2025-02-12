@@ -28,3 +28,6 @@ out/
 # Misc
 .DS_Store
 *.pem
+
+# Development tracking files
+DEVELOPMENT_ROADMAP.md

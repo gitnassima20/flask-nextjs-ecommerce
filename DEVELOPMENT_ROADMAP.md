@@ -20,22 +20,25 @@
 - [x] Create NextJS project
   - [x] Choose TypeScript template
   - [x] Set up project dependencies
-- [ ] Configure project structure
-  - [ ] Create `components/` directory
-  - [ ] Create `pages/` directory
-  - [ ] Set up global styles
+- [x] Configure project structure
+  - [x] Create `components/` directory
+  - [x] Create `pages/` directory
+  - [x] Set up global styles
+  - [x] Clean up default layout and page
+  - [x] Create products page as default view
 - [ ] Install additional dependencies
   - [ ] Tailwind CSS
   - [ ] Axios for API calls
   - [ ] React Icons
 
 ## 🔙 Backend Setup (Flask)
+
 - [ ] Create Python virtual environment
 - [ ] Install Flask dependencies
   - [ ] Flask
-   - [ ] Flask-CORS
-   - [ ] Flask-SQLAlchemy
-   - [ ] python-dotenv
+  - [ ] Flask-CORS
+  - [ ] Flask-SQLAlchemy
+  - [ ] python-dotenv
 - [ ] Set up project structure
   - [ ] Create `app.py`
   - [ ] Create `models/`
@@ -47,6 +50,7 @@
 ## 🛠️ Core Features Development
 
 ### Frontend Tasks
+
 - [ ] Create product listing page
   - [ ] Responsive grid layout
   - [ ] Product card component
@@ -60,6 +64,7 @@
 - [ ] Implement responsive design
 
 ### Backend Tasks
+
 - [ ] Create product CRUD API endpoints
   - [ ] GET /products
    - [ ] POST /products

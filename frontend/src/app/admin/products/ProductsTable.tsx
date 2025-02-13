@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { Product, fetchProducts, deleteProduct } from '@/lib/api';
+import { toast } from 'react-hot-toast';
 
 export default function ProductsTable() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState<number | null>(null);
 
   const loadProducts = async () => {
     try {
@@ -16,6 +18,7 @@ export default function ProductsTable() {
     } catch (err) {
       console.error('Error loading products:', err);
       setError('Failed to load products');
+      toast.error('Failed to load products');
     } finally {
       setIsLoading(false);
     }
@@ -28,10 +31,16 @@ export default function ProductsTable() {
   const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
+        setIsDeleting(id);
         await deleteProduct(id);
         await loadProducts();
+        toast.success('Product deleted successfully');
       } catch (err) {
+        console.error('Error deleting product:', err);
         setError('Failed to delete product');
+        toast.error('Failed to delete product');
+      } finally {
+        setIsDeleting(null);
       }
     }
   };
@@ -86,9 +95,12 @@ export default function ProductsTable() {
               <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                 <button
                   onClick={() => handleDelete(product.id)}
-                  className="text-red-600 hover:text-red-900"
+                  disabled={isDeleting === product.id}
+                  className={`text-red-600 hover:text-red-900 ${
+                    isDeleting === product.id ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
                 >
-                  Delete
+                  {isDeleting === product.id ? 'Deleting...' : 'Delete'}
                 </button>
               </td>
             </tr>

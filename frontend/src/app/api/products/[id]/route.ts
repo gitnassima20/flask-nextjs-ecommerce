@@ -16,6 +16,11 @@ export async function PUT(
       body: JSON.stringify(body),
     });
 
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || 'Failed to update product');
+    }
+
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
@@ -31,6 +36,8 @@ export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }
 ) {
+  console.log('Deleting product:', params.id);
+  
   try {
     const response = await fetch(`${BASE_URL}/products/${params.id}`, {
       method: 'DELETE',
@@ -40,9 +47,16 @@ export async function DELETE(
     });
 
     if (!response.ok) {
-      throw new Error('Failed to delete product');
+      const errorText = await response.text();
+      console.error('Delete product error:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText
+      });
+      throw new Error(errorText || 'Failed to delete product');
     }
 
+    // Return 204 No Content on successful deletion
     return new NextResponse(null, { status: 204 });
   } catch (error) {
     console.error('Delete Product API Error:', error);

@@ -146,3 +146,125 @@ export async function deleteProduct(id: number): Promise<void> {
     throw error;
   }
 }
+
+export interface CartItem {
+  id: number;
+  product_id: number;
+  quantity: number;
+  product: Product;
+}
+
+export async function getCart(): Promise<CartItem[]> {
+  console.log('Fetching cart...');
+  
+  try {
+    const response = await fetch('/api/cart', {
+      method: 'GET',
+      headers: defaultHeaders,
+      cache: 'no-store'
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch cart: ${errorText}`);
+    }
+    
+    const data = await response.json();
+    console.log('Cart fetched successfully:', data);
+    return data.cart || []; // Extract cart array from response
+  } catch (error) {
+    console.error('Error fetching cart:', error);
+    throw error;
+  }
+}
+
+export async function addToCart(productId: number, quantity: number = 1): Promise<CartItem> {
+  console.log('Adding to cart:', { productId, quantity });
+  
+  try {
+    const response = await fetch('/api/cart', {
+      method: 'POST',
+      headers: defaultHeaders,
+      body: JSON.stringify({ product_id: productId, quantity }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to add to cart: ${errorText}`);
+    }
+
+    const data = await response.json();
+    console.log('Added to cart successfully:', data);
+    return data.cart;
+  } catch (error) {
+    console.error('Error adding to cart:', error);
+    throw error;
+  }
+}
+
+export async function updateCartItem(productId: number, quantity: number): Promise<CartItem> {
+  console.log('Updating cart item:', { productId, quantity });
+  
+  try {
+    const response = await fetch('/api/cart', {
+      method: 'PATCH',
+      headers: defaultHeaders,
+      body: JSON.stringify({ product_id: productId, quantity }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to update cart: ${errorText}`);
+    }
+
+    const data = await response.json();
+    console.log('Cart item updated successfully:', data);
+    return data.cart;
+  } catch (error) {
+    console.error('Error updating cart item:', error);
+    throw error;
+  }
+}
+
+export async function removeFromCart(productId: number): Promise<void> {
+  console.log('Removing from cart:', productId);
+  
+  try {
+    const response = await fetch('/api/cart', {
+      method: 'DELETE',
+      headers: defaultHeaders,
+      body: JSON.stringify({ product_id: productId }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to remove from cart: ${errorText}`);
+    }
+    
+    console.log('Removed from cart successfully');
+  } catch (error) {
+    console.error('Error removing from cart:', error);
+    throw error;
+  }
+}
+
+export async function clearCart(): Promise<void> {
+  console.log('Clearing cart');
+  
+  try {
+    const response = await fetch('/api/cart?action=clear', {
+      method: 'DELETE',
+      headers: defaultHeaders,
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to clear cart: ${errorText}`);
+    }
+    
+    console.log('Cart cleared successfully');
+  } catch (error) {
+    console.error('Error clearing cart:', error);
+    throw error;
+  }
+}

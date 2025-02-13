@@ -51,9 +51,9 @@
 
 ### Frontend Tasks
 
-- [ ] Create product listing page
-  - [ ] Responsive grid layout
-  - [ ] Product card component
+- [x] Create product listing page
+  - [x] Responsive grid layout
+  - [x] Product card component
 - [ ] Implement cart functionality
   - [ ] Add to cart button
   - [ ] Cart state management
